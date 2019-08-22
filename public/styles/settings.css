@@ -1,0 +1,112 @@
+body{
+    text-align: center;
+    color: #eee;
+    background-image: url('../images/settings.jpg'); 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.nav ul{
+    list-style: none;
+}
+.nav a{
+    text-decoration: none;
+    color:white
+}
+
+.nav a:hover{
+    background-color: #333;
+    color:rosybrown;
+}
+.container{
+    max-width: 480px;
+    background-image: url('../images/settings.jpg');
+    background-size: 200%;
+    display: flex;
+    flex-direction: column;
+    border: 3px dotted cornsilk;
+    margin: 0 auto;
+        
+}
+
+.container > div {
+    width: 460px;
+    background-color: rgb(150, 150, 150, 0.75);
+    margin: 10px;
+    font-size: 30px;
+    padding: 5px;
+}
+
+input {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 3px 5px;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+    width: 190px;
+  }
+
+.upload {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 3px 5px;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+    width: 115px;
+  }
+
+
+#upload{
+    color:white;
+    font-size: 24px;
+    border-radius: 10px;
+    background-color: darkslategray;
+}
+
+#confirm{
+    color:white;
+    font-size: 24px;
+    border-radius: 10px;
+    background-color: rgb(17, 138, 37);    
+    border: 3px solid white;
+}
+#back_messager{
+    color:white;
+    font-size: 24px;
+    border-radius: 10px;
+    background-color: rgb(17, 138, 37);    
+    border: 3px solid white;
+}
+
+#confirm:hover{
+    background-color: rgb(116, 198, 137);    
+    border: 3px solid rgb(17, 138, 37);
+}
+
+.info p{
+    text-align: left;
+    font-size: 16px;
+    color:white;
+    display: inline;
+}
+
+.info .edit{
+    color: rgb(52, 46, 226);
+    font-weight: bold;
+}
+
+.info .edit:hover{
+    color: rgb(172, 168, 236);
+    font-weight: bold;
+}
+
+.info .okay{
+    color: rgb(31, 97, 12);
+    font-weight: bold;
+}
+
+.info .okay:hover{
+    color: rgb(69, 187, 36);;
+    font-weight: bold;
+}

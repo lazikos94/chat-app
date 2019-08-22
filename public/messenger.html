@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>messenger</title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/messenger.css">
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="container">
+        <div class="nav">
+            <ul>
+                <li><a id="profile"><i class="fa fa-user-circle" aria-hidden="true">PROFILE</i></a></li>    
+                <li><a id = "messenger"><i class="fa fa-commenting" aria-hidden="true">MESSAGES</i></a></li>    
+                <li><a id = "settings"><i class="fa fa-commenting" aria-hidden="true">SETTINGS</i></a></li>
+                <li><a id = "logout"><i class="fa fa-sign-out" aria-hidden="true">LOGOUT</i></a></li>    
+            </ul>
+        </div>
+		<div class="header">
+			<p><img src="images/face.png"style="width: 45px;height: 80px">Chatter name</p>
+		</div>
+		<div class="personal_info">
+            <img id="profile_picture" src="images/face.png" style="width: 46px;height: 80px"></br> 		
+			<p id='username'></p>
+        </div>	
+        <div class="header">
+            <p id="sender"><img src="images/face.png" style="width: 45px;height: 80px">Chatter name</p>
+        </div>	
+		<div id="chat_history" class="chat_history" >
+            <div class="containerchat">
+              <img id="user_message" src="images/face.png" alt="Avatar">
+                <p id="display_message"></p>
+                <span class="time_right" id="time"></span>
+            </div>
+        </div>
+		<div class="message">
+            <input type="text" id="to_email" placeholder="Email of the receiver..."></input>
+			<input type="text" id="message" placeholder="Type your message here..."></input>
+			<button type="button" onclick="SendMessage();">send</button>
+		</div>
+		<div class="friends">
+            <input id="search" type="text" name="box" placeholder="Find your friends">
+            <button><i class="fa fa-search"></i></button>
+            <hr>
+            <div class=friendscontainer>
+                <div class="containerchat">
+                    <img id="user_message" src="images/face.png" alt="Avatar">
+                    <p id="display_message"></p>
+                    <span class="time_right" id="time"></span>
+                </div>
+        </div>
+		<div class="footer">
+			<p>Copyrighted &copy; by MyWebChat.gr | 2019</p>
+		</div>
+	</div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="scripts/messenger.js"></script>
+</html>

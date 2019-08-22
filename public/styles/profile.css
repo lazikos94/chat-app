@@ -1,0 +1,57 @@
+ body{
+                color: #eee;
+                background-image: url('boat.jpg'); 
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .nav{
+                text-align: center;
+            }
+            .nav ul{
+                background-color: rgb(34, 95, 141, 0.70);
+                border-radius: 4px;
+                list-style: none;   
+            }
+
+            .nav li{
+                height: 30px;
+            }
+
+            .nav a{
+                color: white;
+                font-size: 20px;
+            }
+            
+            .nav a:hover{ 
+                background-color: rgb(20, 63, 95);
+                border-bottom: 2px solid white;
+                border-radius: 10px;
+            }
+
+            .name{
+                font-size: 30px;
+                text-decoration: underline;
+                text-align: right
+            }
+
+            img{
+                border:2px solid white;
+                border-radius: 50%;
+                vertical-align: middle;
+            }
+            .content{
+                border: 2px solid white;
+                background-color: rgb(34, 95, 141, 0.70);
+                max-width: 700px;
+                margin-left:50%;
+                transform: translateX(-50%);
+                border-radius: 5px;
+                font-size: 19px;
+            }
+            hr{
+                color:white;
+                height: 3px;
+                background-color:white;
+            }

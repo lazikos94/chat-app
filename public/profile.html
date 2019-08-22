@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile | Web Chat</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles/profile.css">
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel=stylesheet href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <li><a id="profile"><i class="fa fa-user-circle" aria-hidden="true">PROFILE</i></a></li>    
+            <li><a id ="messenger"><i class="fa fa-commenting" aria-hidden="true">MESSAGES</i></a></li>    
+            <li><a id ="settings"><i class="fa fa-commenting" aria-hidden="true">SETTINGS</i></a></li>
+            <li><a id ="logout"><i class="fa fa-sign-out" aria-hidden="true">LOGOUT</i></a></li>    
+        </ul>
+    </div>
+    <div class="content">
+        <img id="profile_picture" src="images/face.png" style="width: 45px;height: 80px"><u id="name"class="name">Name</u>
+        <hr style="color:white;">
+        <p style="display: inline">Age: </p><p id="age" style="display: inline"></p>
+        <hr>
+        <p style="display: inline">Bio: </p><p id="bio" style="display: inline"></p>
+        <hr>
+        <p style="display: inline">School: </p><p id="school" style="display: inline"></p>
+        <hr>
+        <p style="display: inline">Country: </p><p id="country" style="display: inline"></p>
+        <hr>
+        <p id="sometext" style="display:inline"></p><a id="settings" href="settings.html" style="display:inline;"></a>
+        <p style=text-align:center>&COPY; COPYRIGHTED</p>
+    </div>
+    <div class ="footer">     
+    </div> 
+</body>
+<script src="scripts/profile.js"></script>
+</html>
