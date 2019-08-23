@@ -7,4 +7,4 @@ real-time chat app,
 
 html/css/javascript/jQuery,
 
-also used are the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API),[Socket.io](https://socket.io/) and the [Express framework](https://expressjs.com/)
+also used are the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Socket.io](https://socket.io/) and the [Express framework](https://expressjs.com/)
