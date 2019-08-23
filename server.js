@@ -29,7 +29,7 @@ var users = {};
 
 io.on('connect',(socket)=>{
 
-    console.log(`listening to port ${port}`);
+    console.log(`socket connected to ${port}`);
     socket.on('userConnected',(data)=>{
         let userId=data.email;
         users[userId]=socket.id;

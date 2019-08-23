@@ -1,12 +1,12 @@
 body{
-    text-align: center;
     color: #eee;
-    background-image: url('../images/settings.jpg'); 
+    background-image: url('boat.jpg'); 
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
+
 .nav ul{
     list-style: none;
 }

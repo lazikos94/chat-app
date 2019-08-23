@@ -29,26 +29,32 @@ if (input.files && input.files[0]) {
     }
 }
 function getBase64Image(img) {
-    // Create an empty canvas element
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    // Copy the image contents to the canvas
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    // Get the data-URL formatted image
-    // Firefox supports PNG and JPEG. You could check img.src to
-    // guess the original format, but be aware the using "image/jpg"
-    // will re-encode the image.
-    const dataURL = canvas.toDataURL("image/jpg");
-    const image = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-    return dataURL;
+    try{
+        // Create an empty canvas element
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        // Copy the image contents to the canvas
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        // Get the data-URL formatted image
+        // Firefox supports PNG and JPEG. You could check img.src to
+        // guess the original format, but be aware the using "image/jpg"
+        // will re-encode the image.
+        const dataURL = canvas.toDataURL("image/jpg");
+        const image = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        return dataURL;
+    }
+    catch(error){
+        console.log(error);
+    }
 }
 function Back(){
     window.location.href = "messenger.html"+ query_info;
 } 
     
-async function UploadSettings(age,biography,school,country,image64){ 
+async function UploadSettings(age,biography,school,country,image64){
+    try{ 
         const data = {
                 settings : {
                     firstname: firstname,
@@ -70,7 +76,12 @@ async function UploadSettings(age,biography,school,country,image64){
         };
         const response = await fetch('/reg', options);
         const json = await response.json();
-        alert("info added",json);            
+        console.log(json);  
+        alert("info added");
+    }
+    catch(error){
+        console.log(error);
+    }            
 }
 async function UpdateEntry(thisfname,thissname,thisemail,thisage,thisbiography,thisschool,thiscountry,thisimage64,id,time){
     try{ 
@@ -98,7 +109,8 @@ async function UpdateEntry(thisfname,thissname,thisemail,thisage,thisbiography,t
         };
         const response = await fetch('/setup', options);
         const json = await response.json();
-        console.log("info deleted",json); 
+        console.log(json);  
+        console.log("info deleted"); 
 
     }
     catch(error){

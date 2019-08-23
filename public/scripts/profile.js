@@ -20,27 +20,27 @@ document.getElementById('logout').addEventListener('click', ()=>{
 });
 
 window.onload = async function GetSettings(){
-try{
-    const response = await fetch('/reg');
-    const dbcontent = await response.json();
-    let user_found = false;
-    dbcontent.forEach((user)=>{
-        if (user.settings !== undefined){
-            if (user.settings.email==email){
-                user_found=true;
-                const image = document.getElementById('profile_picture');
-                image.src = user.settings.image;
-                image.alt="picture of lazaros";
-                document.getElementById('age').innerText = user.settings.age;
-                document.getElementById('bio').innerText = user.settings.bio;
-                document.getElementById('school').innerText = user.settings.school;
-                document.getElementById('country').innerText = user.settings.country;
+    try{
+        const response = await fetch('/reg');
+        const dbcontent = await response.json();
+        let user_found = false;
+        dbcontent.forEach((user)=>{
+            if (user.settings !== undefined){
+                if (user.settings.email==email){
+                    user_found=true;
+                    const image = document.getElementById('profile_picture');
+                    image.src = user.settings.image;
+                    image.alt="picture of lazaros";
+                    document.getElementById('age').innerText = user.settings.age;
+                    document.getElementById('bio').innerText = user.settings.bio;
+                    document.getElementById('school').innerText = user.settings.school;
+                    document.getElementById('country').innerText = user.settings.country;
+                }
             }
-        }
-        else{
-            return 0;
-        }
-    });      
+            else{
+                return 0;
+            }
+        });      
         if (!user_found){
             alert("please update settings");
         }

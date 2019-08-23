@@ -1,6 +1,10 @@
 body{
-	color: white;
-	background: #666;
+    color: #eee;
+    background-image: url('boat.jpg'); 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .container{
@@ -9,8 +13,9 @@ body{
 	grid-template-rows: auto;
 	grid-gap: 1em;
 	grid-template-areas: 
-	"mynav			personal_info"	
-    "head 			friends"
+	"mynav			personal_info"
+	"head			personal_info"	
+    "chat_history 	friends"
     "chat_history 	friends"
     "chat_history 	friends"
     "message		friends"
@@ -18,10 +23,10 @@ body{
 }
 
 .container > div{
-	border-radius: 10px;
+	border-radius: 6px;
 	box-shadow: inset 0 0 15px #ffffff;
-	background-color: rgb(95, 95, 95);
-	border: 2px solid white;
+	background-color: rgb(195, 195, 195, 0.4);
+	border: 1px solid white;
 }
 
 .nav{
@@ -30,11 +35,11 @@ body{
 
 .header{
 	grid-area: head;
-	font-size: 140%;
+	font-size: 130%;
 }
 
 .header p{
-	padding-left: 25px;
+	padding-left: 5px;
 }
 
 .header img{
@@ -83,7 +88,7 @@ body{
 }
 
 .personal_info img:hover{
-	background-image: url('images/camera.png');
+
 }
 
 .chat_history{
@@ -102,7 +107,7 @@ body{
 	color: white;
 	width: 85%;
 	font-size:110%;
-	background-color: #252323;
+	background-color: #25232399;
 	border-style: none;
 	margin-left: 10px;
 	margin-top: 15px;
@@ -117,6 +122,7 @@ body{
 	font-size: 100%;
 	border-radius: 5px;
 	color: white;
+	transform:translateY(-50%);
 	background-color: #36b;
 }
 
@@ -159,28 +165,28 @@ label {
 	z-index: 1;
 }
 .nav{
-	height: 100px;
+	height: 40px;
 }
 .nav ul{
 	text-decoration: none;
 	list-style: none;
+	margin: 5px;
 }
 .nav li{
 	float:left;
-	margin-top: 10px;
-	padding-left: 20px;
+	padding: 5px;
 }
 .nav a{
 	color: #eee;
-	background-color: #333;
-	font-size: 25px;
-	border-radius: 10px;
+	background-color: #3337;
+	font-size: 14px;
+	border-radius: 5px;
 }
 
 .nav a:hover{
 	color: rgb(10, 40, 100);
 	background-color: #ccc;
-	font-size: 25px;
+	font-size: 16px;
 	border-radius: 10px;
 }
 
@@ -235,9 +241,29 @@ label {
 	color: #999;
   }
 
-  @media only screen and (max-width: 600px) {
-	.container{
-		display: block;
+  .nav .menuToggle{
+	padding: 5px;
+	margin: 5px;
+	display:none;
+	cursor: pointer;
 	}
 
+  @media screen and (max-width: 700px) {
+	.nav .menuToggle{
+		display:inline-block;
+	}
+
+	.nav{
+		height: auto;
+		text-align: center;
+	}
+
+	.nav li{
+		float: none;
+		z-index: 1;
+	}
+
+	.nav .menu{
+		display:none;
+	}
 }

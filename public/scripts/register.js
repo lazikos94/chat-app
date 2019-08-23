@@ -45,22 +45,27 @@ async function CheckEmail(){
 	}	
 }
 async function SendReg(f_name,s_name,email,password){
-	const data = { 
-        info : {
-        firstname: f_name,
-        surname: s_name,
-        email: email,
-        password: password
+	try{
+		const data = { 
+			info : {
+			firstname: f_name,
+			surname: s_name,
+			email: email,
+			password: password
+		}
+		};
+		const options = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+		};
+		const response = await fetch('/reg', options);
+		const json = await response.json();
+		console.log(json);
 	}
-	};
-	const options = {
-	method: 'POST',
-	headers: {
-		'Content-Type': 'application/json'
-	},
-	body: JSON.stringify(data)
-	};
-	const response = await fetch('/reg', options);
-	const json = await response.json();
-	console.log(json);
+	catch(error){
+		console.log(error);
+	}
 }

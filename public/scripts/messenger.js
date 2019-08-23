@@ -26,16 +26,25 @@ let userdata={
     sname: surname
 };
 
-socket.on('my_message',(data)=> {
+socket.on('my_message',async (data)=> {
     try{
-    document.getElementById('display_message').innerText=data.message;
+
+    $("div.chat_history").append(
+        `<div class='containerchat'>
+            <img id='user_message' src='images/face.png' alt='Avatar'>
+            <p id='display_message'>${data.firstname} ${data.surname}: ${data.message}</p>
+            <span class='time_right' id='time'></span>
+        </div>`
+    );
+    //$("div.containerchat").children('p').text(message);
+    //document.getElementById('display_message').innerText=data.firstname+" "+data.surname+": "+data.message;
     document.getElementById('sender').innerText= data.firstname+" "+data.surname;
-    const data={
+    const datatosend={
         received_message:{
-        firstname:data.firstname,
-        surname:data.surname,
+        firstname:firstname,
+        surname:surname,
         email:data.email,
-        to:email,
+        from:data.from,
         message:data.message}
     }
     const options = {
@@ -43,10 +52,12 @@ socket.on('my_message',(data)=> {
         headers: {
             'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(datatosend)
     };
     const response = await fetch('/reg', options);
-    const json = await response.json();}
+    const json = await response.json();
+    console.log(json);  
+    }
     catch(error){
         console.log(error);
     }
@@ -54,6 +65,7 @@ socket.on('my_message',(data)=> {
 
 socket.emit('userConnected',userdata);
 function readURL(input) {
+    try{
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -62,8 +74,13 @@ function readURL(input) {
             };  
             reader.readAsDataURL(input.files[0]);     
         }
+    }
+    catch(error){
+        console.log(error)
+    }
 }
 function PictureLoad(input) {
+    try{
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -72,6 +89,10 @@ function PictureLoad(input) {
             };  
             reader.readAsDataURL(input.files[0]);     
         }
+    }
+    catch(error){
+        console.log(error)
+    }
 } 
 async function SendMessage(){
     try{
@@ -79,7 +100,15 @@ async function SendMessage(){
     const message = document.getElementById('message').value;
     const toemail = document.getElementById('to_email').value;    
 
-    socket.emit('pm_message', {message: message, email: toemail, firstname:firstname, surname: surname});
+    socket.emit('pm_message', {message: message, email: toemail, firstname:firstname, surname: surname,from: email});
+
+    $("div.chat_history").append(
+        `<div class='containerchat'>
+            <img id='user_message' src='images/face.png' alt='Avatar'>
+            <p id='display_message'>${toemail}: ${message}</p>
+            <span class='time_right' id='time'></span>
+        </div>`
+    );
 
     const data = {
         sent_message:{
@@ -98,7 +127,8 @@ async function SendMessage(){
     body: JSON.stringify(data)
     };
     const response = await fetch('/reg', options);
-    const json = await response.json();  
+    const json = await response.json();
+    console.log(json);  
     }
     catch(error){
         console.log(error);
@@ -130,3 +160,6 @@ window.onload = async function GetSettings(){
         console.log(error);
     }
 }
+    /*$('#send_button').click(function(){
+        $("#chat_history").append("<div class='containerchat'><img id='user_message' src='images/face.png' alt='Avatar'><p id='display_message'></p><span class='time_right' id='time'></span></div>");
+    });*/
