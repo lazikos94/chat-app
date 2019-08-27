@@ -25,29 +25,50 @@ let userdata={
     fname: firstname,
     sname: surname
 };
+<<<<<<< HEAD
 let friend_name;
 socket.on('my_message',async (data)=> {
     try{
     let datafromemail =await getdatafromemail(data.email);
     var today = new Date();
     var date = today.toLocaleString();
+=======
+
+socket.on('my_message',async (data)=> {
+    try{
+
+>>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
     $("div.chat_history").append(
         `<div class='containerchat'>
             <img id='user_message' src='images/face.png' alt='Avatar'>
             <p id='display_message'>${data.firstname} ${data.surname}: ${data.message}</p>
+<<<<<<< HEAD
             <span class='time_right' id='time'>${date}</span>
         </div>`
     );
     $('div.chat_history').scrollTop($('div.chat_history')[0].scrollHeight);
+=======
+            <span class='time_right' id='time'></span>
+        </div>`
+    );
+>>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
     //$("div.containerchat").children('p').text(message);
     //document.getElementById('display_message').innerText=data.firstname+" "+data.surname+": "+data.message;
     document.getElementById('sender').innerText= data.firstname+" "+data.surname;
     const datatosend={
+<<<<<<< HEAD
         message:{
         firstname:firstname,
         surname:surname,
         from:data.from,
         to:data.email,
+=======
+        received_message:{
+        firstname:firstname,
+        surname:surname,
+        email:data.email,
+        from:data.from,
+>>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
         message:data.message}
     }
     const options = {
@@ -100,6 +121,7 @@ function PictureLoad(input) {
 async function SendMessage(){
     try{
 
+<<<<<<< HEAD
     /*const message = document.getElementById('message').value;
     const toemail = document.getElementById('to_email').value;
     const datafromemail=await getdatafromemail(toemail);
@@ -137,10 +159,23 @@ async function SendMessage(){
             <img id='user_message' src='images/face.png' alt='Avatar'>
             <p id='display_message'>${firstname} ${surname}: ${message}</p>
             <span class='time_right' id='time'>${date}</span>
+=======
+    const message = document.getElementById('message').value;
+    const toemail = document.getElementById('to_email').value;    
+
+    socket.emit('pm_message', {message: message, email: toemail, firstname:firstname, surname: surname,from: email});
+
+    $("div.chat_history").append(
+        `<div class='containerchat'>
+            <img id='user_message' src='images/face.png' alt='Avatar'>
+            <p id='display_message'>${toemail}: ${message}</p>
+            <span class='time_right' id='time'></span>
+>>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
         </div>`
     );
 
     const data = {
+<<<<<<< HEAD
         message:{
             firstname:firstname,
             surname:surname,
@@ -149,6 +184,16 @@ async function SendMessage(){
             message:message
         }
     } 
+=======
+        sent_message:{
+            firstname:firstname,
+            surname:surname,
+            email:email,
+            to:toemail,
+            message:message
+        }
+    }
+>>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
     const options = {
         method: 'POST',
         headers: {
@@ -164,6 +209,7 @@ async function SendMessage(){
         console.log(error);
     }
 }
+<<<<<<< HEAD
 async function getdatafromemail(email){
     const response = await fetch('/reg');
     const dbcontent = await response.json();
@@ -196,6 +242,8 @@ async function getdatafromemail(email){
         return info_of_user;
     }
 }
+=======
+>>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
 window.onload = async function GetSettings(){
     try{
         const response = await fetch('/reg');
@@ -210,6 +258,12 @@ window.onload = async function GetSettings(){
                     image.alt="picture of lazaros";
                 }
             }
+<<<<<<< HEAD
+=======
+            else{
+				return 0;
+			}
+>>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
         });      
         if (!user_found){
             alert("please update settings");
@@ -219,6 +273,7 @@ window.onload = async function GetSettings(){
         console.log(error);
     }
 }
+<<<<<<< HEAD
 async function GetMessages(toemail,fromemail){
     const response = await fetch('/reg');
     const dbcontent = await response.json();
@@ -291,6 +346,8 @@ $(document).on('click','#select_friend',async function(){
 
 //$(document).on("click", function () {});
 
+=======
+>>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
     /*$('#send_button').click(function(){
         $("#chat_history").append("<div class='containerchat'><img id='user_message' src='images/face.png' alt='Avatar'><p id='display_message'></p><span class='time_right' id='time'></span></div>");
     });*/
