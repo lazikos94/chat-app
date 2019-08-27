@@ -14,34 +14,23 @@ body{
 	grid-gap: 1em;
 	grid-template-areas: 
 	"mynav			personal_info"
-<<<<<<< HEAD
 	"chat_history	personal_info"	
-=======
-	"head			personal_info"	
->>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
     "chat_history 	friends"
     "chat_history 	friends"
     "chat_history 	friends"
     "message		friends"
-<<<<<<< HEAD
 	"footer			footer";
 }
 label {
 	cursor: pointer;
 	/* Style as you please, it will become the visible UI component. */
  }
-=======
-    "footer			footer";
-}
-
->>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
 .container > div{
 	border-radius: 6px;
 	box-shadow: inset 0 0 15px #ffffff;
 	background-color: rgb(195, 195, 195, 0.4);
 	border: 1px solid white;
 }
-<<<<<<< HEAD
 .chat_history img{
 	border: 2px solid #fff;
 	border-radius: 25%;
@@ -56,9 +45,6 @@ label {
 	color:red;
 	text-decoration: underline;
 }
-=======
-
->>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
 .nav{
 	grid-area: mynav;
 }
@@ -152,37 +138,25 @@ label {
 	font-size: 100%;
 	border-radius: 5px;
 	color: white;
-<<<<<<< HEAD
 
-=======
-	transform:translateY(-50%);
->>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
 	background-color: #36b;
 }
 
 .friends{
 	grid-area: friends;
 	padding: 10px;
-<<<<<<< HEAD
 	position: relative;
-=======
->>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
 }
 
 .friendscontainer{
 	overflow: scroll;
-<<<<<<< HEAD
 	position: relative;
-=======
-	height: 200px;
->>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
 }
 
 .friends button{
 	border: 3px solid rgb(60, 118, 218);
 	padding: 4px;
 }
-<<<<<<< HEAD
 .searchcontainer{
 	border: 3px solid rgb(160, 218, 218);
 	background-color: #acacaaaa;
@@ -193,8 +167,6 @@ label {
 	overflow: scroll;
 	display:none;
 }
-=======
->>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
 
 #search{
 	border: 3px solid rgb(60, 118, 218);
@@ -261,7 +233,6 @@ label {
 	border-color: #ccc;
 	background-color: #ddd;
   }
-<<<<<<< HEAD
   #friend{
 	width: 90%;
 	border: 2px solid #dedede;
@@ -302,9 +273,6 @@ label {
 #friend #friend_image:hover{
 	opacity: 0.65;
 }
-=======
-  
->>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
   /* Clear floats */
   .container::after {
 	content: "";
@@ -330,13 +298,9 @@ label {
   /* Style time text */
   .time_right {
 	float: right;
-<<<<<<< HEAD
 	color: white;
 	bottom: 20px;
 	position: relative;
-=======
-	color: #aaa;
->>>>>>> 3df6595705cd137bf3b7a84812f8676d30d1aac9
   }
   
   /* Style time text */
