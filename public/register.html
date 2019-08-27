@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Register | Web Chat</title>
+	<link rel = "stylesheet" type="text/css" href="styles/log_reg.css">
+	<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<h2>Sign up</h2>
+		<form>
+			<input type="text" id="fname" placeholder="Enter your first name" required>
+			<input type="text" id="sname" placeholder="Enter your last name" required>
+			<input type="text" id="email" placeholder="Enter your email" required>
+			<input type="password" id = "pass1" placeholder="Enter your password" required>
+			<input type="password" id = "pass2" placeholder="Repeat your password" required>
+			<button type="button" id="submit" value="Sign Up" onclick="CheckEmail();">Sign Up</button>
+			<hr>
+			<p>You have already an account? Okay, <a href="login.html">Login</a> then!</p>
+		</form>
+	</div>
+</body>
+<script src="scripts/register.js"></script>
+</html>

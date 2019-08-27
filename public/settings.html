@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Properties | Web Chat</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles/settings.css">
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <ul>
+                <li><a id="profile"><i class="fa fa-user-circle" aria-hidden="true">PROFILE</i></a></li>    
+                <li><a id ="messenger"><i class="fa fa-commenting" aria-hidden="true">MESSAGES</i></a></li>    
+                <li><a id ="settings"><i class="fa fa-commenting" aria-hidden="true">SETTINGS</i></a></li>
+                <li><a id ="logout"><i class="fa fa-sign-out" aria-hidden="true">LOGOUT</i></a></li>    
+            </ul>
+        </div>
+    <div>
+    <h2>Settings</h2>
+    </div>
+    <hr>
+    <div>
+        <img id="profile_image" src="images/face.png" alt="profile" ></br>
+        <input class="upload" type="file" name="pic" id="pic" accept="image/*" onchange="readURL(this);"/>
+        <form></br>
+            <input type="text" id="age" placeholder="Enter your age" required/></br>
+            <input type="text" id="bio" placeholder="Enter your bio"required/></br>
+            <input type="text" id="school" placeholder="Enter your school"required/></br>
+            <input type="text" id="country" placeholder="Enter your country"required/></br>
+            <button type="button" id="confirm" onclick="CheckSettings();">Confirm</button>
+        </form></br>
+        <button id="back_messager" onclick="Back();">Back</button>
+    </div>
+    </div>
+</body>           
+<script src="scripts/settings.js"></script> 
+</html>

@@ -1,0 +1,337 @@
+body{
+    color: #eee;
+    background-image: url('boat.jpg'); 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.container{
+	display: grid;
+	grid-template-columns: 5fr 2fr;
+	grid-template-rows: auto;
+	grid-gap: 1em;
+	grid-template-areas: 
+	"mynav			personal_info"
+	"chat_history	personal_info"	
+    "chat_history 	friends"
+    "chat_history 	friends"
+    "chat_history 	friends"
+    "message		friends"
+	"footer			footer";
+}
+label {
+	cursor: pointer;
+	/* Style as you please, it will become the visible UI component. */
+ }
+.container > div{
+	border-radius: 6px;
+	box-shadow: inset 0 0 15px #ffffff;
+	background-color: rgb(195, 195, 195, 0.4);
+	border: 1px solid white;
+}
+.chat_history img{
+	border: 2px solid #fff;
+	border-radius: 25%;
+}
+
+.chat_history p{
+	margin: 5px;
+	font-size:22px;
+}
+
+.chat_history p:hover{
+	color:red;
+	text-decoration: underline;
+}
+.nav{
+	grid-area: mynav;
+}
+
+.header{
+	grid-area: head;
+	font-size: 130%;
+}
+
+.header p{
+	padding-left: 5px;
+}
+
+.header img{
+	display: inline-block;
+	vertical-align: middle;
+	overflow: hidden;
+	border: 2px solid #545454;
+	border-radius: 50%;
+}
+
+.profil_container{
+	position: relative;
+  	text-align: center;
+}
+
+.profil_container img:hover {
+  opacity: 0.3;
+}
+
+.profil_container img:hover .centered {
+  opacity: 1;
+}
+
+.centered {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.personal_info{
+	grid-area: personal_info;
+}
+
+.personal_info p{
+	padding-left: 25px;
+}
+
+.personal_info img{
+	margin: 10px;
+	float: left;
+	vertical-align: middle;
+	border: 2px solid #545454;
+	border-radius: 50%;
+}
+
+.personal_info img:hover{
+
+}
+
+.chat_history{
+	grid-area: chat_history;
+	padding: 10px;
+	overflow: scroll;
+	height: 400px;
+}
+
+.message{
+	padding: 10px;
+	grid-area: message;
+}
+
+.message input{
+	color: white;
+	width: 85%;
+	font-size:110%;
+	background-color: #25232399;
+	border-style: none;
+	margin-left: 10px;
+	margin-top: 15px;
+	border-radius: 10px;
+	vertical-align: middle;
+	transform: translateY(-40%);
+}
+
+.message button{
+	height:100%;
+	width: 10%;
+	font-size: 100%;
+	border-radius: 5px;
+	color: white;
+
+	background-color: #36b;
+}
+
+.friends{
+	grid-area: friends;
+	padding: 10px;
+	position: relative;
+}
+
+.friendscontainer{
+	overflow: scroll;
+	position: relative;
+}
+
+.friends button{
+	border: 3px solid rgb(60, 118, 218);
+	padding: 4px;
+}
+.searchcontainer{
+	border: 3px solid rgb(160, 218, 218);
+	background-color: #acacaaaa;
+	position:absolute;
+	z-index: 1;
+	width: 92%;
+	height: 86%;
+	overflow: scroll;
+	display:none;
+}
+
+#search{
+	border: 3px solid rgb(60, 118, 218);
+	width: 60%;
+	height: 30px;
+	background-color: #aab;
+	border-radius: 20px;
+	padding: 0px 10px;
+}
+
+.footer{
+	grid-area: footer;
+	color:rgb(255, 255, 255);
+	text-align: center;
+}
+label {
+	cursor: pointer;
+	/* Style as you please, it will become the visible UI component. */
+ }
+#pic{
+	opacity: 0;
+	position: absolute;
+	z-index: 1;
+}
+.nav{
+	height: 40px;
+}
+.nav ul{
+	text-decoration: none;
+	list-style: none;
+	margin: 5px;
+}
+.nav li{
+	float:left;
+	padding: 5px;
+}
+.nav a{
+	color: #eee;
+	background-color: #3337;
+	font-size: 14px;
+	border-radius: 5px;
+}
+
+.nav a:hover{
+	color: rgb(10, 40, 100);
+	background-color: #ccc;
+	font-size: 16px;
+	border-radius: 10px;
+}
+
+/* Chat containers */
+.containerchat {
+	border: 2px solid #dedede;
+	box-shadow: inset 0 0 10px #000000;
+	background-color:rgba(238, 238, 238, 0.411);
+	border-radius: 5px;
+	padding: 5px;
+	margin: 10px 0;
+	height: 45px;
+  }
+  
+  /* Darker chat container */
+  .darker {
+	border-color: #ccc;
+	background-color: #ddd;
+  }
+  #friend{
+	width: 90%;
+	border: 2px solid #dedede;
+	box-shadow: inset 0 0 10px #000000;
+	background-color:rgba(238, 238, 238, 1.0);
+	border-radius: 5px;
+	padding: 5px;
+	margin: 10px 5px;
+	height: 45px;
+	opacity: 1;
+	color:black;
+}
+#select_friend{
+	float:right;
+	padding-top: 18px;
+	font-size: 120%;
+}
+#select_friend:hover{
+	color: green;
+	font-size: 160%;
+}
+#friend i{
+	float:right;
+	padding-top: 18px;
+	font-size: 120%;
+}
+
+#friend i:hover{
+	color: green;
+	font-size: 160%;
+}
+
+#friend #friend_image{
+	display: inline;
+	vertical-align: middle;
+}
+
+#friend #friend_image:hover{
+	opacity: 0.65;
+}
+  /* Clear floats */
+  .container::after {
+	content: "";
+	clear: both;
+	display: table;
+  }
+ 
+  .containerchat img {
+	float: left;
+	max-width: 48px;
+	width: 100%;
+	max-height: 50px;
+	border-radius: 50%;
+  }
+  
+
+  .containerchat img.right {
+	float: right;
+	margin-left: 20px;
+	margin-right:0;
+  }
+ 
+  /* Style time text */
+  .time_right {
+	float: right;
+	color: white;
+	bottom: 20px;
+	position: relative;
+  }
+  
+  /* Style time text */
+  .time-left {
+	float: left;
+	color: #999;
+  }
+
+  .nav .menuToggle{
+	padding: 5px;
+	margin: 5px;
+	display:none;
+	cursor: pointer;
+	}
+
+  @media screen and (max-width: 700px) {
+	.nav .menuToggle{
+		display:inline-block;
+	}
+
+	.nav{
+		height: auto;
+		text-align: center;
+	}
+
+	.nav li{
+		float: none;
+		z-index: 1;
+	}
+
+	.nav .menu{
+		display:none;
+	}
+}

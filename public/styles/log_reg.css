@@ -1,0 +1,99 @@
+body{
+	list-style: none;
+	background: url("background.jpg") no-repeat fixed center;
+	background-size: cover;
+	font-family: Arial;
+	min-width: 460px;
+}
+
+.wrap{
+	width: 460px;
+	border-radius: 25px;
+	margin: auto;
+	background: rgba(0, 0, 0, 0.75);
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	color: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+h2{
+	text-align: center;
+}
+button{
+	width: 60%;
+	padding: 10px;
+	margin-top:30px;
+	outline: none;
+	border: none;
+	background: #60adde;
+	opacity: 0.9;
+	border-radius: 20px;
+	font-size:20px;
+	color:white;
+}
+input{
+	width: 90%;
+	box-sizing: border-box;
+	padding: 12px 5px;
+	background: rgba(0,0,0,0.80);
+	outline:none;
+	border: none;
+	border-bottom: 2px solid #fff;
+	border-radius: 12px;
+	margin: 5px;
+	font-weight: bold;
+	color:white;
+}
+
+/*input[type=submit]{
+	width: 60%;
+	padding: 10px;
+	margin-top:30px;
+	outline: none;
+	border: none;
+	background: #60adde;
+	opacity: 0.9;
+	border-radius: 20px;
+	font-size:20px;
+	color:white;
+}*/
+
+label{
+	display: inline;
+}
+
+input[type=checkbox]{
+
+	width: 24px;
+}
+
+button:hover{
+	background: #4444aa;
+	opacity: 0.7;
+}
+
+p{
+	text-align: center;
+	padding-top:20px;
+}
+
+p a{
+	text-decoration: none;
+	color:#60adde;
+	font-weight: bold;
+}
+
+p a:hover{
+	color:#4444aa;
+}
+
+
+@media only screen and (max-device-width: 480px) {
+        .wrap{
+        	width: 360px;
+        }
+}

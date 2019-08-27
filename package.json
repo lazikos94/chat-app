@@ -1,0 +1,38 @@
+{
+  "name": "server-login",
+  "version": "1.0.0",
+  "description": "a server for login/register",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "lazaros",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "bower": "^1.8.8",
+    "brew": "0.0.8",
+    "camo": "^0.12.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "firebase": "^6.3.4",
+    "git": "^0.1.5",
+    "http": "0.0.0",
+    "i": "^0.3.6",
+    "jquery": "^3.4.1",
+    "mongodb": "^3.3.0",
+    "mongoose": "^5.6.9",
+    "nedb": "^1.8.0",
+    "nedb-promise": "^2.0.1",
+    "net": "^1.0.2",
+    "node": "^12.9.0",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.1",
+    "pug": "^2.0.4",
+    "resize-base64": "^1.0.12",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
+  },
+  "license": "ISC"
+}
