@@ -152,6 +152,8 @@ label {
 .friendscontainer{
 	overflow: scroll;
 	position: relative;
+	height:350px;
+	
 }
 
 .friends button{

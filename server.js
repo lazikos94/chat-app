@@ -46,6 +46,9 @@ io.on('connect',(socket)=>{
             console.log("user no existo");
         }
     });
+    socket.on("typing", data => { 
+        socket.broadcast.emit("notifyTyping", { user: data.user, message: data.message }); }); 
+    socket.on("stopTyping", () => { socket.broadcast.emit("notifyStopTyping"); });
 });
 
 app.post('/reg', (request,response)=>{

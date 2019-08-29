@@ -28,7 +28,6 @@ let userdata={
 let friend_name;
 socket.on('my_message',async (data)=> {
     try{
-    let datafromemail =await getdatafromemail(data.email);
     var today = new Date();
     var date = today.toLocaleString();
     $("div.chat_history").append(
@@ -38,27 +37,8 @@ socket.on('my_message',async (data)=> {
             <span class='time_right' id='time'>${date}</span>
         </div>`
     );
-    $('div.chat_history').scrollTop($('div.chat_history')[0].scrollHeight);
-    /*const datatosend={
-        message:{
-            firstname:firstname,
-            surname:surname,
-            from:data.from,
-            to:data.email,
-            message:data.message,
-            image:data.image
-        }
-    }
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(datatosend)
-    };
-    const response = await fetch('/reg', options);
-    const json = await response.json();
-    console.log(json);*/  
+    let box=document.getElementById('chat_history');
+    box.scrollTop = box .scrollHeight;
     }
     catch(error){
         console.log(error);
@@ -66,6 +46,21 @@ socket.on('my_message',async (data)=> {
 });
 
 socket.emit('userConnected',userdata);
+message.addEventListener("keypress", () =>  {
+    socket.emit("typing", { user: "Someone", message: "is typing..."  });
+    });
+    socket.on("notifyTyping", data  =>  {
+    message.innerText  =  data.user  +  "  "  +  data.message;
+    console.log(data.user  +  data.message);
+    });
+    //stop typing
+    message.addEventListener("keyup", () =>  {
+    socket.emit("stopTyping", "");
+    });
+    socket.on("notifyStopTyping", () =>  {
+    message.innerText  =  "";
+    
+    });
 function readURL(input) {
     try{
         if (input.files && input.files[0]) {
@@ -95,7 +90,13 @@ function PictureLoad(input) {
     catch(error){
         console.log(error)
     }
-} 
+}
+$('#message').keypress((e)=>{
+    if(e.which==13){
+        $('#send_button').click();
+        $('#message').val("");
+    }
+})
 async function SendMessage(){
     try{
     const message = document.getElementById('message').value;
@@ -111,6 +112,8 @@ async function SendMessage(){
             <span class='time_right' id='time'>${date}</span>
         </div>`
     );
+    let box=document.getElementById('chat_history');
+    box.scrollTop = box .scrollHeight;
     const data = {
         message:{
             firstname:firstname,
@@ -130,6 +133,7 @@ async function SendMessage(){
     };
     const response = await fetch('/reg', options);
     const json = await response.json();
+    $('#message').val("");
     }
     catch(error){
         console.log(error);
@@ -220,77 +224,91 @@ async function GetMessages(toemail,fromemail){
         }
 
     });
+    let box=document.getElementById('chat_history');
+    box.scrollTop = box .scrollHeight;
 
 }
-var shouldLoad = true;
 $('#searchbtn').click(async function(){
     const search_value=document.getElementById('search').value;
-    console.log("click works")
     const response = await fetch('/reg');
     const dbcontent = await response.json();
     let search_email;
     let found=false;
-    let span;
+    let already_friends=false;
+    let already_searched=false;
     $('#friends_found').slideToggle(300, async function(){
         dbcontent.forEach((user)=>{
             if (user.settings !== undefined){
                 if((user.settings.email==search_value)||(user.settings.firstname==search_value)||(user.settings.surname==search_value)){
                     found=true;
                     search_email=user.settings.email;
-                    shouldLoad = false;
                 }
             }      
         });
         if(!found){
             console.log("nosuchname")
         }
-        else{
+        else if (found){
             let info_for_friend=await getdatafromemail(search_email);
-            console.log(info_for_friend)
             $("#friends_found").append(
             `<div id='friend'>
                 <img id='friend_image' src=${info_for_friend.image64} width='42px' title='show_profile'>
                 <span id='content'>${info_for_friend.firstname} ${info_for_friend.surname}</span>
                 <i id='add' class='fa fa-plus' aria-hidden='true'></i>
             </div>`);
-            //edo ginetai i oli mpizna me to add
-            $('#add').click(async function(){
-                console.log('click')
-                $("div.friendscontainer").append(
-                    `<div class='containerchat'>
-                        <img id='user_message' src=${info_for_friend.image64} alt='Avatar'>
-                        <i id='select_friend' class='fa fa-plus' aria-hidden='true'></i>
-                        <span id='friend_name'>${info_for_friend.firstname} ${info_for_friend.surname}</span></br>
-                        <span id='friend_email'>${info_for_friend.email}</span>
-                      
-                    </div>`);
-                const data = {
-                    friends:{
-                        friend_of:email,
-                        friend_email:search_email,
-                        friend_image:info_for_friend.image64,
-                        friend_firstname:info_for_friend.firstname,
-                        friend_surname:info_for_friend.surname,
+            const response = await fetch('/reg');
+            const dbcontent = await response.json();
+            dbcontent.forEach((user)=>{
+                if(user.friends !==undefined){
+                    if((user.friends.friend_email==search_email) && (user.friends.friend_of==email)){
+                        already_friends=true;
                     }
-                } 
-                const options = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-                };
-                const response = await fetch('/reg', options);
-                $('#friends_found').empty();
-                $("#friends_found").hide();
+                }
+            });
+            $('#add').click(async function(){
+                if(!already_friends){
+                    $("div.friendscontainer").append(
+                        `<div class='containerchat'>
+                            <img id='user_message' src=${info_for_friend.image64} alt='Avatar'>
+                            <i id='select_friend' class='fa fa-plus' aria-hidden='true'></i>
+                            <span id='friend_name'>${info_for_friend.firstname} ${info_for_friend.surname}</span></br>
+                            <span id='friend_email'>${info_for_friend.email}</span>
+                        </div>`);
+                    const data = {
+                        friends:{
+                            friend_of:email,
+                            friend_email:search_email,
+                            friend_image:info_for_friend.image64,
+                            friend_firstname:info_for_friend.firstname,
+                            friend_surname:info_for_friend.surname,
+                        }
+                    } 
+                    const options = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                    };
+                    const response = await fetch('/reg', options);
+                    $('#search').val("");
+                    $('#search').attr("placeholder","Find your friends");
+                    $('#friends_found').empty();
+                    $("#friends_found").hide();
+                }else{
+                    alert('already friends')
+                    $('#search').val("");
+                    $('#search').attr("placeholder","Find your friends");
+                    $('#friends_found').empty();
+                    $("#friends_found").hide();
+                }
             });
         }
     });
 });
 $(document).on('click','#select_friend',async function(){
-    friend_name = $('i#select_friend').siblings('span#friend_email').text();
-    GetMessages(friend_name,email);
-    //GetMessages(email,friend_name);
+    friend_name = $(this).siblings('span#friend_email').text();
+    $('#chat_history').empty();
     let friend_username;
     let friend_pic;
     const response = await fetch('/reg');
@@ -303,13 +321,9 @@ $(document).on('click','#select_friend',async function(){
             }
         }
     });
-    document.getElementById('friend_pic').src=friend_pic;
-    document.getElementById('chatter_name').innerText=friend_username;
+    $("div.chat_history").append(
+        `<img id="friend_pic" src=${friend_pic} style="width: 45px;height: 80px; display:inline;" >
+        <p id="chatter_name" style="display:inline;">${friend_username}</p><hr>`
+    );
+    GetMessages(friend_name,email);
 });
-
-
-//$(document).on("click", function () {});
-
-    /*$('#send_button').click(function(){
-        $("#chat_history").append("<div class='containerchat'><img id='user_message' src='images/face.png' alt='Avatar'><p id='display_message'></p><span class='time_right' id='time'></span></div>");
-    });*/
