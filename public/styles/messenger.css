@@ -39,6 +39,7 @@ label {
 .chat_history p{
 	margin: 5px;
 	font-size:22px;
+
 }
 
 .chat_history p:hover{

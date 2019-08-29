@@ -33,22 +33,21 @@ socket.on('my_message',async (data)=> {
     var date = today.toLocaleString();
     $("div.chat_history").append(
         `<div class='containerchat'>
-            <img id='user_message' src='images/face.png' alt='Avatar'>
+            <img id='user_message' src=${data.image} alt='Avatar'>
             <p id='display_message'>${data.firstname} ${data.surname}: ${data.message}</p>
             <span class='time_right' id='time'>${date}</span>
         </div>`
     );
     $('div.chat_history').scrollTop($('div.chat_history')[0].scrollHeight);
-    //$("div.containerchat").children('p').text(message);
-    //document.getElementById('display_message').innerText=data.firstname+" "+data.surname+": "+data.message;
-    document.getElementById('sender').innerText= data.firstname+" "+data.surname;
-    const datatosend={
+    /*const datatosend={
         message:{
-        firstname:firstname,
-        surname:surname,
-        from:data.from,
-        to:data.email,
-        message:data.message}
+            firstname:firstname,
+            surname:surname,
+            from:data.from,
+            to:data.email,
+            message:data.message,
+            image:data.image
+        }
     }
     const options = {
         method: 'POST',
@@ -59,7 +58,7 @@ socket.on('my_message',async (data)=> {
     };
     const response = await fetch('/reg', options);
     const json = await response.json();
-    console.log(json);  
+    console.log(json);*/  
     }
     catch(error){
         console.log(error);
@@ -99,54 +98,27 @@ function PictureLoad(input) {
 } 
 async function SendMessage(){
     try{
-
-    /*const message = document.getElementById('message').value;
-    const toemail = document.getElementById('to_email').value;
-    const datafromemail=await getdatafromemail(toemail);
-    
-    GetMessages(toemail,email);
-    var today = new Date();
-    var date = today.toLocaleString();
-    socket.emit('pm_message', {message: message, email: toemail, firstname:firstname, surname: surname,from: email, image:datafromemail.image});
-    $("div.chat_history").append(
-        `<div class='containerchat'>
-            <img id='user_message' src='images/face.png' alt='Avatar'>
-            <p id='display_message'>${firstname} ${surname}: ${message}</p>
-            <span class='time_right' id='time'>${date}</span>
-        </div>`
-    );
-
-    const data = {
-        message:{
-            firstname:firstname,
-            surname:surname,
-            from:email,
-            to:toemail,
-            message:message
-        }
-    }*/
     const message = document.getElementById('message').value;
-    const datafromemail=await getdatafromemail(friend_name);
-    
-    GetMessages(friend_name,email);
+    const datafromemail=await getdatafromemail(email);
     var today = new Date();
     var date = today.toLocaleString();
-    socket.emit('pm_message', {message: message, email: friend_name, firstname:firstname, surname: surname,from: email, image:datafromemail.image});
+    socket.emit('pm_message', {message: message, email: friend_name, firstname:firstname, surname: surname,from: email, image:datafromemail.image64});
+
     $("div.chat_history").append(
         `<div class='containerchat'>
-            <img id='user_message' src='images/face.png' alt='Avatar'>
+            <img id='user_message' src=${datafromemail.image64} alt='Avatar'>
             <p id='display_message'>${firstname} ${surname}: ${message}</p>
             <span class='time_right' id='time'>${date}</span>
         </div>`
     );
-
     const data = {
         message:{
             firstname:firstname,
             surname:surname,
             from:email,
             to:friend_name,
-            message:message
+            message:message,
+            image:datafromemail.image64
         }
     } 
     const options = {
@@ -158,7 +130,6 @@ async function SendMessage(){
     };
     const response = await fetch('/reg', options);
     const json = await response.json();
-    console.log(json);  
     }
     catch(error){
         console.log(error);
@@ -199,15 +170,27 @@ async function getdatafromemail(email){
 window.onload = async function GetSettings(){
     try{
         const response = await fetch('/reg');
-		const dbcontent = await response.json();
-        let user_found = false;
+        const dbcontent = await response.json();
+        let user_found=false;
         dbcontent.forEach((user)=>{
             if (user.settings !== undefined){
                 if (user.settings.email==email){
-                    user_found=true;
+                    user_found =true;
                     const image = document.getElementById('profile_picture');
                     image.src = user.settings.image;
                     image.alt="picture of lazaros";
+                }
+            }
+            if(user.friends !== undefined){
+                if(user.friends.friend_of == email){
+                    $("div.friendscontainer").append(
+                        `<div class='containerchat'>
+                            <img id='user_message' src=${user.friends.friend_image} alt='Avatar'>
+                            <i id='select_friend' class='fa fa-plus' aria-hidden='true'></i>
+                            <span id='friend_name'>${user.friends.friend_firstname} ${user.friends.friend_surname}</span></br>
+                            <span id='friend_email'>${user.friends.friend_email}</span>
+
+                        </div>`);
                 }
             }
         });      
@@ -224,18 +207,20 @@ async function GetMessages(toemail,fromemail){
     const dbcontent = await response.json();
     dbcontent.forEach((user)=>{
         if (user.message !== undefined){
-            if((user.message.from=fromemail)&&(user.message.toemail=toemail)){
+            if(((user.message.from == fromemail)&&(user.message.to == toemail))||((user.message.from == toemail)&&(user.message.to == fromemail))){
                 const datestring= new Date(user.time).toLocaleString();
                 $("div.chat_history").append(
                     `<div class='containerchat'>
-                        <img id='user_message' src='images/face.png' alt='Avatar'>
+                        <img id='user_message' src=${user.message.image} alt='Avatar'>
                         <p id='display_message'>${user.message.firstname} ${user.message.surname}: ${user.message.message}</p>
                         <span class='time_right' id='time'>${datestring}</span>
                     </div>`
                 );
             }
         }
+
     });
+
 }
 var shouldLoad = true;
 $('#searchbtn').click(async function(){
@@ -260,23 +245,42 @@ $('#searchbtn').click(async function(){
             console.log("nosuchname")
         }
         else{
+            let info_for_friend=await getdatafromemail(search_email);
+            console.log(info_for_friend)
             $("#friends_found").append(
             `<div id='friend'>
-                <img id='friend_image' src='images/face.png' width='42px' title='show_profile'>
-                <span id='content'>${search_email}</span>
+                <img id='friend_image' src=${info_for_friend.image64} width='42px' title='show_profile'>
+                <span id='content'>${info_for_friend.firstname} ${info_for_friend.surname}</span>
                 <i id='add' class='fa fa-plus' aria-hidden='true'></i>
             </div>`);
             //edo ginetai i oli mpizna me to add
             $('#add').click(async function(){
                 console.log('click')
-                span= $("#content").text();
-                console.log(span);
                 $("div.friendscontainer").append(
                     `<div class='containerchat'>
-                        <img id='user_message' src='images/face.png' alt='Avatar'>
-                        <span id='friend_name'>${span}</span>
+                        <img id='user_message' src=${info_for_friend.image64} alt='Avatar'>
                         <i id='select_friend' class='fa fa-plus' aria-hidden='true'></i>
+                        <span id='friend_name'>${info_for_friend.firstname} ${info_for_friend.surname}</span></br>
+                        <span id='friend_email'>${info_for_friend.email}</span>
+                      
                     </div>`);
+                const data = {
+                    friends:{
+                        friend_of:email,
+                        friend_email:search_email,
+                        friend_image:info_for_friend.image64,
+                        friend_firstname:info_for_friend.firstname,
+                        friend_surname:info_for_friend.surname,
+                    }
+                } 
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+                };
+                const response = await fetch('/reg', options);
                 $('#friends_found').empty();
                 $("#friends_found").hide();
             });
@@ -284,8 +288,23 @@ $('#searchbtn').click(async function(){
     });
 });
 $(document).on('click','#select_friend',async function(){
-    friend_name = $('i#select_friend').siblings('span#friend_name').text();
-    console.log(friend_name);
+    friend_name = $('i#select_friend').siblings('span#friend_email').text();
+    GetMessages(friend_name,email);
+    //GetMessages(email,friend_name);
+    let friend_username;
+    let friend_pic;
+    const response = await fetch('/reg');
+    const dbcontent = await response.json();
+    dbcontent.forEach((user)=>{
+        if (user.settings != undefined){
+            if(user.settings.email == friend_name){
+                friend_username=user.settings.firstname+" "+user.settings.surname;
+                friend_pic = user.settings.image;
+            }
+        }
+    });
+    document.getElementById('friend_pic').src=friend_pic;
+    document.getElementById('chatter_name').innerText=friend_username;
 });
 
 
