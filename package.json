@@ -27,7 +27,7 @@
     "nedb-promise": "^2.0.1",
     "net": "^1.0.2",
     "node": "^12.9.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "nodemon": "^1.19.1",
     "pug": "^2.0.4",
     "resize-base64": "^1.0.12",
