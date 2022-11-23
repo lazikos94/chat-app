@@ -31,7 +31,7 @@
     "nodemon": "^1.19.1",
     "pug": "^2.0.4",
     "resize-base64": "^1.0.12",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.5.0",
     "socket.io-client": "^2.2.0"
   },
   "license": "ISC"
